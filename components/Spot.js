@@ -27,7 +27,7 @@ export default class Spot extends Component<{}> {
 
 const styles = StyleSheet.create({
   item: {
-    height: 200,
+    height: 160,
     alignItems: 'flex-end',
     flex: 1,
     flexDirection: 'column',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
   },
   itemtitle: {
-    marginTop: 90,
+    marginTop: 50,
     fontSize: 30,
     color: '#ffffff',
     textAlign: 'right',
