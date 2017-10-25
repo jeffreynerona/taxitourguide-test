@@ -9,12 +9,14 @@ import {
 
 export default class Spot extends Component<{}> {
   render() {
+    let placeholder = require('../images/headerbg.jpg')
+    let imageuri = this.props.item.acf.photo ? {uri: this.props.item.acf.photo.sizes.medium} : placeholder;
     return (
           <Image
-            source={require('../images/spot1.jpg')}
+            source={imageuri}
             style={styles.itemimg}>
             <View style={styles.item}>
-            <Text style={styles.itemtitle}>{this.props.item.key}</Text>
+            <Text style={styles.itemtitle}>{this.props.item.title.rendered}</Text>
             <Text style={styles.itemreviews}>300 Reviews</Text>
             </View>
           </Image>
