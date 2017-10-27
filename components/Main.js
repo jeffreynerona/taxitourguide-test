@@ -3,11 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Button
 } from 'react-native';
+import {
+  TabNavigator
+} from 'react-navigation';
 
-import MainToggle from './MainToggle';
 import Spots from './Spots';
+import Spot from './Spot';
+import Drivers from './Drivers';
+import SpotDetails from './SpotDetails';
 
 
 export default class Main extends Component<{}> {
@@ -16,30 +22,40 @@ export default class Main extends Component<{}> {
     this.state = {
       active: 1
     }
-
-  }
-
-  _onPressButton() {
-    this.setState({active: 1});
-  }
-
-  _onPressButtonTwo() {
-    this.setState({active: 2});
   }
 
   render() {
-    let mainContent;
-    if (this.state.active == 1) {
-      mainContent = <Spots/>
-    } else
-    {
-      mainContent = <Text>Nothing here yet :)</Text>
-    }
+    const RootTabs = TabNavigator({
+      Home: {
+        screen: Spots,
+
+      },
+      Drivers: {
+        screen: Drivers,
+      }
+    },{
+       tabBarOptions: {
+        activeTintColor: '#000000',
+        inactiveTintColor: 'gray',
+        style: {
+        backgroundColor: '#F5FCFF'
+        },
+        indicatorStyle: {
+          backgroundColor: 'green'
+        },
+      }
+    });
 
     return (
-      <View style={styles.container}>
-      <MainToggle active={this.state.active} setActiveOne={() => this._onPressButton()} setActiveTwo={() => this._onPressButtonTwo()}/>
-      {mainContent}
+      <View style={styles.container}
+       >
+
+       <RootTabs/>
+       <Button title='waa' onPress={() => {
+      this.props.toggleForm(false);
+      alert('wtf');
+      }
+      }></Button>
       </View>
     );
   }

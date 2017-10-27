@@ -3,14 +3,18 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   Image,
   AsyncStorage,
   ToastAndroid
 } from 'react-native';
+import {
+  StackNavigator
+} from 'react-navigation';
 
-import Spot from './Spot';
-import Loading from './Loading'
+import Loading from './Loading';
+import SpotsList from './SpotsList';
+import SpotDetails from './SpotDetails';
+
 
 export default class Spots extends Component<{}> {
   constructor() {
@@ -20,7 +24,9 @@ export default class Spots extends Component<{}> {
     }
   }
 
-  _keyExtractor = (item, index) => item.id;
+  static navigationOptions = {
+    tabBarLabel: 'TOURIST SPOTS',
+  }
 
   getDataFromApiAsync() {
     fetch('http://thewebguysnetwork.com/taxitourguide/wp-json/wp/v2/spot')
@@ -71,22 +77,26 @@ export default class Spots extends Component<{}> {
   }
 
   render() {
-    let spots = (<FlatList
-          style={styles.theList}
-          data={this.state.spots}
-          keyExtractor={this._keyExtractor}
-          renderItem={({item}) => (
-            <Spot item={item}/>
-            )}
-        />);
-    let content = this.state.spots.length > 0 ? spots : <Loading/>;
+    const { navigate } = this.props.navigation;
+    const SpotStack = StackNavigator({
+      Home: {
+        screen: SpotsList,
+      },
+      Details: {
+        screen: SpotDetails,
+      },
+    },{
+       headerMode: 'none' 
+    });
+
+    let content = this.state.spots.length > 0 ? <SpotStack screenProps={{spots:this.state.spots}}/> : <Loading/>;
 
     return (
         <View
         style={styles.container}>
           {content}
           <View style={styles.filter}>
-            <Text style={styles.filterText}>Filters HERE</Text>
+            <Text style={styles.filterText} >Filters HERE</Text>
           </View>
         </View>
     );
