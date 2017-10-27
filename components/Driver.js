@@ -73,7 +73,6 @@ export default class Spot extends Component<{}> {
             }}>
             <View style={styles.item}>
             <Text style={styles.itemtitle}>{this.props.item.title.rendered}</Text>
-            <Text style={styles.itemreviews}>300 Reviews</Text>
             </View>
             </TouchableNativeFeedback>
           </Image>

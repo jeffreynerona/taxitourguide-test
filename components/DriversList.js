@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Spot from './Spot';
 
-export default class SpotsList extends Component<{}> {
+export default class DriversList extends Component<{}> {
   
   _keyExtractor = (item, index) => item.id;
 
@@ -14,7 +14,7 @@ export default class SpotsList extends Component<{}> {
     return (
       <FlatList
           style={styles.theList}
-          data={this.props.spots}
+          data={this.props.drivers}
           keyExtractor={this._keyExtractor}
           renderItem={({item}) => <Spot item={item}/>}
       />

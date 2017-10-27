@@ -3,13 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   AsyncStorage,
   ToastAndroid
 } from 'react-native';
-import {
-  StackNavigator
-} from 'react-navigation';
 
 import Loading from './Loading';
 import SpotsList from './SpotsList';
