@@ -13,7 +13,6 @@ import {
 
 import Loading from './Loading';
 import SpotsList from './SpotsList';
-import SpotDetails from './SpotDetails';
 
 
 export default class Spots extends Component<{}> {
@@ -77,19 +76,8 @@ export default class Spots extends Component<{}> {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-    const SpotStack = StackNavigator({
-      Home: {
-        screen: SpotsList,
-      },
-      Details: {
-        screen: SpotDetails,
-      },
-    },{
-       headerMode: 'none' 
-    });
 
-    let content = this.state.spots.length > 0 ? <SpotStack screenProps={{spots:this.state.spots}}/> : <Loading/>;
+    let content = this.state.spots.length > 0 ? <SpotsList spots={this.state.spots}/> : <Loading/>;
 
     return (
         <View

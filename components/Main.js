@@ -13,7 +13,6 @@ import {
 import Spots from './Spots';
 import Spot from './Spot';
 import Drivers from './Drivers';
-import SpotDetails from './SpotDetails';
 
 
 export default class Main extends Component<{}> {
@@ -47,15 +46,10 @@ export default class Main extends Component<{}> {
     });
 
     return (
-      <View style={styles.container}
-       >
+      <View style={styles.container}>
 
        <RootTabs/>
-       <Button title='waa' onPress={() => {
-      this.props.toggleForm(false);
-      alert('wtf');
-      }
-      }></Button>
+
       </View>
     );
   }

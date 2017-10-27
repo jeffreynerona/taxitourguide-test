@@ -9,18 +9,30 @@ import {
   Modal,
   TouchableHighlight
 } from 'react-native';
-
+import striptags from 'striptags';
+const Entities = require('html-entities').AllHtmlEntities;
+ 
+const entities = new Entities()
 export default class Spot extends Component<{}> {
   state = {
     modalVisible: false,
   }
+
+  cleanUp(input) {
+    input = striptags(input);
+    return entities.decode(input);
+  }
+
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
   render() {
     
-    let placeholder = require('../images/headerbg.jpg')
+    let placeholder = require('../images/headerbg.jpg');
+    let backbutton = require('../images/back.png');
+    var description = this.props.item.content.rendered;
+    description = this.cleanUp(description);
     let imageuri = this.props.item.acf.photo ? {uri: this.props.item.acf.photo.sizes.medium} : placeholder;
     return (
           <Image
@@ -28,24 +40,32 @@ export default class Spot extends Component<{}> {
             style={styles.itemimg}>
             <Modal
               animationType="slide"
-              transparent={false}
+              transparent={true}
               style={styles.modal}
               visible={this.state.modalVisible}
               onRequestClose={() => {
                   this.setModalVisible(!this.state.modalVisible)
                 }}
               >
-              <View style={styles.modalview}>
-                <TouchableHighlight onPress={() => {
+              <TouchableHighlight onPress={() => {
                   this.setModalVisible(!this.state.modalVisible)
                 }}>
-                  <Text>BACK</Text>
+                  <View style={styles.backCon}>
+                  <Image
+                  source={backbutton}
+                  style={styles.backButton}>
+                  </Image>
+                  </View>
                 </TouchableHighlight>
+              <View style={styles.modalview}>
                  <Image
                 source={imageuri}
                 style={styles.detailimg}>
+                <Text style={styles.detailtitle}>{this.props.item.title.rendered}</Text>
                 </Image>
-                <Text>{this.props.item.title.rendered}</Text>
+                <View style={styles.detailbody}>
+                <Text style={styles.detaildesc}>{description}</Text>
+                </View>
               </View>
             </Modal>
             <TouchableNativeFeedback
@@ -53,7 +73,7 @@ export default class Spot extends Component<{}> {
               this.setModalVisible(true)
             }}>
             <View style={styles.item}>
-            <Text style={styles.itemtitle}>{this.props.item.title.rendered}</Text>
+            <Text style={styles.itemtitle}>{this.props.item.title.rendered.replace(/<\/?[^>]+(>|$)/g, "")}</Text>
             <Text style={styles.itemreviews}>300 Reviews</Text>
             </View>
             </TouchableNativeFeedback>
@@ -78,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
   },
   itemtitle: {
-    marginTop: 50,
+    marginTop: 60 ,
     fontSize: 30,
     color: '#ffffff',
     textAlign: 'right',
@@ -90,14 +110,32 @@ const styles = StyleSheet.create({
   },
   detailimg: {
     alignSelf: 'stretch',
-    height:250
+    height:200,
+    paddingRight: 10
   },
   modalview: {
     flex:1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#F5FCFF'
   },
-  modal: {
-    height: 200
+  backCon: {
+    padding: 10,
+    height: 50
+  },
+  backButton: {
+    height: 30,
+    width: 30
+  },
+  detailtitle: {
+    textAlign: 'right',
+    color: '#ffffff',
+    fontSize: 30,
+    marginTop: 150
+  },
+  detailbody: {
+    padding: 10
+  },
+  detaildesc: {
+    color: '#000000'
   }
 });
-

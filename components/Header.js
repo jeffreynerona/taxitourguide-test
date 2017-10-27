@@ -19,7 +19,7 @@ export default class Header extends Component<{}> {
           <TextInput 
           editable = {true}
           maxLength = {40}
-          style={this.props.showForm ? styles.input : styles.input}
+          style={styles.input}
           placeholder = 'Where do you want to go today?'
           underlineColorAndroid='rgba(0,0,0,0)'
           ></TextInput>
@@ -33,7 +33,10 @@ export default class Header extends Component<{}> {
 const styles = StyleSheet.create({
   header: {
     backgroundColor:'transparent',
-    padding: 15,
+    paddingBottom: 10,
+    paddingTop: 7,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   headerbg: {
     width: undefined,
@@ -46,13 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 28
   },
   input: {
-    color: '#000000',
-    backgroundColor: '#ffffff',
-    marginTop: 10,
-    textAlign: 'center'
-  },
-  hideinput: {
-    display: 'none',
     color: '#000000',
     backgroundColor: '#ffffff',
     marginTop: 10,

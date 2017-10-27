@@ -14,7 +14,7 @@ export default class Drivers extends Component<{}> {
     return (
       <FlatList
           style={styles.theList}
-          data={this.props.screenProps.spots}
+          data={this.props.spots}
           keyExtractor={this._keyExtractor}
           renderItem={({item}) => (
             <Spot 
