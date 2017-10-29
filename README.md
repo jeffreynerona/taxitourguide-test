@@ -2,4 +2,4 @@
   
 A mobile App for Taxi Tour Guide. A tour guide(taxi driver) booking app for Baguio City
 
-##Abandoning this to rewrite it using React Redux
+## Abandoning this to rewrite it using React Redux: https://github.com/jeffreynerona/taxitourguide-android
